@@ -3,6 +3,7 @@ package com.rasmoo.cliente.escola.gradecurricular.entity;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -15,7 +16,7 @@ public class Bank {
 	@Column(name = "BANK_ID")
 	private Long bankId;
 
-	@Column(name = "NAME")
+	@Column(name = "NOME_CONTATO")
 	private String name;
 
 	@Embedded
@@ -56,8 +57,8 @@ public class Bank {
 	
 	@ElementCollection
 	@CollectionTable(name = "BANK_CONTACT", joinColumns = @JoinColumn(name = "BANK_ID"))
-	@Column(name = "NAME")
-	private Collection<String> contacts = new ArrayList<String>();
+	@Column(name = "NOME_CONTATO")
+	private List<String> contacts = new ArrayList<String>();
 
 	public Long getBankId() {
 		return bankId;
@@ -143,7 +144,7 @@ public class Bank {
 		return this.contacts;
 	}
 
-	public void setContacts(Collection<String> contacts){
+	public void setContacts(List<String> contacts){
 	   this.contacts = contacts;
         }
 
