@@ -1,9 +1,6 @@
 package com.rasmoo.cliente.escola.gradecurricular.entity;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import javax.persistence.*;
 
@@ -57,8 +54,9 @@ public class Bank {
 	
 	@ElementCollection
 	@CollectionTable(name = "BANK_CONTACT", joinColumns = @JoinColumn(name = "BANK_ID"))
+	@MapKeyColumn(name="POSITION_TYPE")
 	@Column(name = "NOME_CONTATO")
-	private List<String> contacts = new ArrayList<String>();
+	private Map<String, String> contacts = new HashMap<String, String>();
 
 	public Long getBankId() {
 		return bankId;
@@ -139,14 +137,14 @@ public class Bank {
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
 	}
-	
-	public Collection<String> getContacts(){
-		return this.contacts;
+
+	public Map<String, String> getContacts() {
+		return contacts;
 	}
 
-	public void setContacts(List<String> contacts){
-	   this.contacts = contacts;
-        }
+	public void setContacts(Map<String, String> contacts) {
+		this.contacts = contacts;
+	}
 
 	public Address getAddress() {
 		return address;

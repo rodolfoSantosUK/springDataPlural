@@ -39,8 +39,8 @@ public class EstudoJpaRepository {
         bank.setCreatedDate(new Date());
         bank.setLastUpdatedBy("Kevin");
         bank.setLastUpdatedDate(new Date());
-        bank.getContacts().add("Joe");
-        bank.getContacts().add("Mary");
+        bank.getContacts().put("Manager","Joe");
+        bank.getContacts().put("Saller","Joe");
         em.persist(bank);
         System.out.println("Salvou dados");
     }
