@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("materia")
+@RequestMapping("/materia")
 public class MateriaController {
 
     private static final String DELETE = "DELETE";

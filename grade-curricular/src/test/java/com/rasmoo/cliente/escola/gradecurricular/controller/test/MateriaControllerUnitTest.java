@@ -3,6 +3,7 @@ package com.rasmoo.cliente.escola.gradecurricular.controller.test;
 import com.rasmoo.cliente.escola.gradecurricular.dto.MateriaDto;
 import com.rasmoo.cliente.escola.gradecurricular.entity.MateriaEntity;
 import com.rasmoo.cliente.escola.gradecurricular.model.Response;
+import com.rasmoo.cliente.escola.gradecurricular.repository.EstudoJpaRepository;
 import com.rasmoo.cliente.escola.gradecurricular.service.IMateriaService;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
@@ -39,6 +40,7 @@ public class MateriaControllerUnitTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
+
 
     private static MateriaDto materiaDto;
 
