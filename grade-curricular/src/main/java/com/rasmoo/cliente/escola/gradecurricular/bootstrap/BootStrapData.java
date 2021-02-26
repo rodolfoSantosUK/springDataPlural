@@ -20,8 +20,8 @@ public class BootStrapData implements CommandLineRunner {
 
         System.out.println("Started in Bootstrap");
         //estudoJpaRepository.salvarEmbeddedUser();
-        estudoJpaRepository.salvarOneToOneUnidirecionalCredencial();
-
+        //estudoJpaRepository.salvarOneToOneUnidirecionalCredencial();
+        estudoJpaRepository.salvarOneToManyUnidirecionalCredencial();
 
     }
 }
