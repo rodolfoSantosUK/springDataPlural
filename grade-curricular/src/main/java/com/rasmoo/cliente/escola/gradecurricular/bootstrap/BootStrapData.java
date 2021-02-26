@@ -19,7 +19,8 @@ public class BootStrapData implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         System.out.println("Started in Bootstrap");
-        estudoJpaRepository.salvarEmbeddedUser();
+        //estudoJpaRepository.salvarEmbeddedUser();
+        estudoJpaRepository.salvarOneToOneUnidirecionalCredencial();
 
 
     }

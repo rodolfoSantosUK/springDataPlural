@@ -2,6 +2,8 @@ package com.rasmoo.cliente.escola.gradecurricular.repository;
 
 import com.rasmoo.cliente.escola.gradecurricular.entity.Address;
 import com.rasmoo.cliente.escola.gradecurricular.entity.Bank;
+import com.rasmoo.cliente.escola.gradecurricular.entity.Credential;
+import com.rasmoo.cliente.escola.gradecurricular.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -45,5 +47,28 @@ public class EstudoJpaRepository {
         System.out.println("Salvou dados");
     }
 
+    @Transactional
+    public void salvarOneToOneUnidirecionalCredencial() {
+
+        User user = new User();
+        user.setFirstName("Kevin");
+        user.setLastName("Bowersox");
+        user.setAge(20);
+        user.setBirthDate(new Date());
+        user.setCreatedBy("Kevin Bowersox");
+        user.setCreatedDate(new Date());
+        user.setEmailAddress("kevin.bowersox@navy.mil");
+        user.setLastUpdatedDate(new Date());
+        user.setLastUpdatedBy("Kevin Bowersox");
+
+        Credential credential = new Credential();
+        credential.setPassword("kevinspassword");
+        credential.setUsername("kmb385");
+        credential.setUser(user);
+
+        em.persist(credential);
+        System.out.println("Salvou no banco o  valor");
+
+    }
 
 }
