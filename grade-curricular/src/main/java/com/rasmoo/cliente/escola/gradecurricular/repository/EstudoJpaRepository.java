@@ -69,6 +69,15 @@ public class EstudoJpaRepository {
 
     }
 
+    @Transactional
+    public void salvarOneToManyBidirecionalCredencial() {
+        Account account = createNewAccount();
+        account.getTransactions().add(createNewBeltPurchase(account));
+        account.getTransactions().add(createShoePurchase(account));
+        em.persist(account);
+    }
+
+
 
     @Transactional
     public void salvarOneToManyUnidirecionalCredencial() {
@@ -127,6 +136,40 @@ public class EstudoJpaRepository {
         account.setCreatedDate(new Date());
         return account;
     }
+
+
+    private static Transaction createNewBeltPurchase(Account account) {
+        Transaction beltPurchase = new Transaction();
+        beltPurchase.setAccount(account);
+        beltPurchase.setTitle("Dress Belt");
+        beltPurchase.setAmount(new BigDecimal("50.00"));
+        beltPurchase.setClosingBalance(new BigDecimal("0.00"));
+        beltPurchase.setCreatedBy("Kevin Bowersox");
+        beltPurchase.setCreatedDate(new Date());
+        beltPurchase.setInitialBalance(new BigDecimal("0.00"));
+        beltPurchase.setLastUpdatedBy("Kevin Bowersox");
+        beltPurchase.setLastUpdatedDate(new Date());
+        beltPurchase.setNotes("New Dress Belt");
+        beltPurchase.setTransactionType("Debit");
+        return beltPurchase;
+    }
+
+    private static Transaction createShoePurchase(Account account) {
+        Transaction shoePurchase = new Transaction();
+        shoePurchase.setAccount(account);
+        shoePurchase.setTitle("Work Shoes");
+        shoePurchase.setAmount(new BigDecimal("100.00"));
+        shoePurchase.setClosingBalance(new BigDecimal("0.00"));
+        shoePurchase.setCreatedBy("Kevin Bowersox");
+        shoePurchase.setCreatedDate(new Date());
+        shoePurchase.setInitialBalance(new BigDecimal("0.00"));
+        shoePurchase.setLastUpdatedBy("Kevin Bowersox");
+        shoePurchase.setLastUpdatedDate(new Date());
+        shoePurchase.setNotes("Nice Pair of Shoes");
+        shoePurchase.setTransactionType("Debit");
+        return shoePurchase;
+    }
+
 
 
 }

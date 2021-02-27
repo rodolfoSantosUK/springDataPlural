@@ -3,21 +3,22 @@ package com.rasmoo.cliente.escola.gradecurricular.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "TRANSACTION")
 public class Transaction {
 
+	@ManyToOne
+	@JoinColumn(name="ACCOUNT_ID")
+	private Account account;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "TRANSACTION_ID")
 	private Long transactionId;
+
+
 
 	@Column(name = "TRANSACTION_TYPE")
 	private String transactionType;
@@ -48,6 +49,14 @@ public class Transaction {
 
 	@Column(name = "CREATED_BY")
 	private String createdBy;
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
 
 	public Long getTransactionId() {
 		return transactionId;

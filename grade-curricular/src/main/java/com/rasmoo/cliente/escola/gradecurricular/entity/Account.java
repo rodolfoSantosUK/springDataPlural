@@ -19,14 +19,15 @@ import javax.persistence.Table;
 @Table(name = "ACCOUNT")
 public class Account {
 
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="account")
+	List<Transaction> transactions = new ArrayList<>();
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ACCOUNT_ID")
 	private Long accountId;
 
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="ACCOUNT_ID", nullable=false)
-	List<Transaction> transactions = new ArrayList<>();
+
 
 	@Column(name = "NAME")
 	private String name;
