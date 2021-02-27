@@ -39,8 +39,8 @@ public class EstudoJpaRepository {
         bank.setCreatedDate(new Date());
         bank.setLastUpdatedBy("Kevin");
         bank.setLastUpdatedDate(new Date());
-        bank.getContacts().put("Manager","Joe");
-        bank.getContacts().put("Saller","Joe");
+        bank.getContacts().put("Manager", "Joe");
+        bank.getContacts().put("Saller", "Joe");
         em.persist(bank);
         System.out.println("Salvou dados");
     }
@@ -70,13 +70,31 @@ public class EstudoJpaRepository {
     }
 
     @Transactional
+    public void salvarJoinTable() {
+        Account account = createNewAccount();
+
+        Budget budget = new Budget();
+        budget.setGoalAmount(new BigDecimal("10000.00"));
+        budget.setName("Emergency Fund");
+        budget.setPeriod("Yearly");
+
+        //  budget.getTransactions().add(createNewBeltPurchase(account));
+        //  budget.getTransactions().add(createShoePurchase(account));
+        em.merge(budget);
+
+        System.out.println("salvarJoinTable");
+
+    }
+
+
+    @Transactional
     public void salvarOneToManyBidirecionalCredencial() {
         Account account = createNewAccount();
         account.getTransactions().add(createNewBeltPurchase(account));
         account.getTransactions().add(createShoePurchase(account));
         em.persist(account);
+        System.out.println("salvarOneToManyBidirecionalCredencial");
     }
-
 
 
     @Transactional
@@ -88,7 +106,6 @@ public class EstudoJpaRepository {
         em.persist(account);
         System.out.println("Salvou no banco o  valor");
     }
-
 
 
     private static Transaction createNewBeltPurchase() {
@@ -105,7 +122,6 @@ public class EstudoJpaRepository {
         beltPurchase.setTransactionType("Debit");
         return beltPurchase;
     }
-
 
 
     private static Transaction createShoePurchase() {
@@ -169,7 +185,6 @@ public class EstudoJpaRepository {
         shoePurchase.setTransactionType("Debit");
         return shoePurchase;
     }
-
 
 
 }

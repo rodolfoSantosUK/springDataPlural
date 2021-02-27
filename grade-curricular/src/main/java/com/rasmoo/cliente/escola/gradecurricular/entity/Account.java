@@ -22,6 +22,7 @@ public class Account {
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="account")
 	List<Transaction> transactions = new ArrayList<>();
 
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ACCOUNT_ID")

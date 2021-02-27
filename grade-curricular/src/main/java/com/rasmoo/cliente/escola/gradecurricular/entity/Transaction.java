@@ -9,16 +9,16 @@ import javax.persistence.*;
 @Table(name = "TRANSACTION")
 public class Transaction {
 
-	@ManyToOne
-	@JoinColumn(name="ACCOUNT_ID")
-	private Account account;
+
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "TRANSACTION_ID")
 	private Long transactionId;
 
-
+	@ManyToOne
+	@JoinColumn(name="ACCOUNT_ID")
+	private Account account;
 
 	@Column(name = "TRANSACTION_TYPE")
 	private String transactionType;
