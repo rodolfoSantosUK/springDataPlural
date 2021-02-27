@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Date;
 
 @Repository
@@ -96,7 +97,6 @@ public class EstudoJpaRepository {
         System.out.println("salvarOneToManyBidirecionalCredencial");
     }
 
-
     @Transactional
     public void salvarOneToManyUnidirecionalCredencial() {
         Account account = createNewAccount();
@@ -106,6 +106,68 @@ public class EstudoJpaRepository {
         em.persist(account);
         System.out.println("Salvou no banco o  valor");
     }
+
+    @Transactional
+    public void salvarManyToManyUnidirecionalCredencial() {
+
+        Account account = createNewAccount();
+        Account account2 = createNewAccount();
+        User user = createUser();
+        User user2 = createUser();
+
+        Credential credential = createCredential(user);
+        user.setCredential(credential);
+        user2.setCredential(credential);
+        em.persist(user);
+        em.persist(user2);
+
+        em.flush();
+        account.getUsers().add(user);
+        account.getUsers().add(user2);
+        account2.getUsers().add(user);
+        account2.getUsers().add(user2);
+
+       // em.persist(account);
+        //em.persist(account2);
+
+    }
+
+
+
+    private static User createUser() {
+        User user = new User();
+        Address address = createAddress();
+        user.setAddresses(Arrays.asList(new Address[]{createAddress()}));
+        user.setBirthDate(new Date());
+        user.setCreatedBy("Kevin Bowersox");
+        user.setCreatedDate(new Date());
+        user.setCredential(createCredential(user));
+        user.setEmailAddress("test@test.com");
+        user.setFirstName("John");
+        user.setLastName("Doe");
+        user.setLastUpdatedBy("system");
+        user.setLastUpdatedDate(new Date());
+        return user;
+    }
+
+    private static Credential createCredential(User user) {
+        Credential credential = new Credential();
+        credential.setUser(user);
+        credential.setUsername("test_username");
+        credential.setPassword("test_password");
+        return credential;
+    }
+
+    private static Address createAddress() {
+        Address address = new Address();
+        address.setAddressLine1("101 Address Line");
+        address.setAddressLine2("102 Address Line");
+        address.setCity("New York");
+        address.setState("PA");
+        address.setZipCode("10000");
+        return address;
+    }
+
 
 
     private static Transaction createNewBeltPurchase() {

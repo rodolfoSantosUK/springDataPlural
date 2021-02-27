@@ -1,6 +1,8 @@
 package com.rasmoo.cliente.escola.gradecurricular.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -9,13 +11,12 @@ import org.hibernate.annotations.Formula;
 @Entity
 @Table(name = "FINANCES_USER")
 public class User {
-
 	@Id
 	@GeneratedValue
 	@Column(name = "USER_ID")
 	private Long userId;
 
-	@OneToOne(mappedBy="user")
+	@OneToOne(mappedBy = "user")
 	private Credential credential;
 
 	@Column(name = "FIRST_NAME")
@@ -30,10 +31,12 @@ public class User {
 	@Column(name = "EMAIL_ADDRESS")
 	private String emailAddress;
 
-	@Embedded
-	@AttributeOverrides({@AttributeOverride(name="addressLine1", column=@Column(name="USUARIO_ADDRESS_LINE_1")),
-		@AttributeOverride(name="addressLine2", column=@Column(name="USUARIO_ADDRESS_LINE_2"))})
-	private Address address;
+	@ElementCollection
+	@CollectionTable(name = "USER_ADDRESS", joinColumns = @JoinColumn(name = "USER_ID"))
+	@AttributeOverrides({
+			@AttributeOverride(name = "addressLine1", column = @Column(name = "USER_ADDRESS_LINE_1")),
+			@AttributeOverride(name = "addressLine2", column = @Column(name = "USER_ADDRESS_LINE_2")) })
+	private List<Address> addresses = new ArrayList<Address>();
 
 	@Column(name = "LAST_UPDATED_DATE")
 	private Date lastUpdatedDate;
@@ -54,12 +57,12 @@ public class User {
 		return age;
 	}
 
-	public Address getAddress() {
-		return address;
+	public List<Address> getAddresses() {
+		return addresses;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
 	}
 
 	public void setAge(int age) {
@@ -136,6 +139,14 @@ public class User {
 
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
+	}
+
+	public Credential getCredential() {
+		return credential;
+	}
+
+	public void setCredential(Credential credential) {
+		this.credential = credential;
 	}
 
 }

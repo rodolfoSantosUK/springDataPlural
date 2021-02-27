@@ -23,6 +23,7 @@ public class BootStrapData implements CommandLineRunner {
         //estudoJpaRepository.salvarOneToOneUnidirecionalCredencial();
         //estudoJpaRepository.salvarOneToManyUnidirecionalCredencial();
         //estudoJpaRepository.salvarOneToManyBidirecionalCredencial();
-        estudoJpaRepository.salvarJoinTable();
+        // estudoJpaRepository.salvarJoinTable();
+        estudoJpaRepository.salvarManyToManyUnidirecionalCredencial();
     }
 }
